@@ -6,7 +6,7 @@ const favicon = require("serve-favicon");
 const path = require("path");
 
 // Import Routes
-const SearchTeamRoute = require("./routes/search");
+const searchTeamRoute = require("./routes/search");
 const getGeoCoding = require('./routes/getGeoLocation')
 const getHotels = require('./routes/getHotels');
 const getRestaurants = require('./routes/getRestaurants');
@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
 });
 
 // Load other endpoints
-app.use('/search?', SearchTeamRoute);
+app.use('/search?', searchTeamRoute);
 app.use('/getGeoLocation?', getGeoCoding);
 app.use('/getHotels?', getHotels);
 app.use('/getRestaurants?', getRestaurants);
