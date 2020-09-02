@@ -1,0 +1,57 @@
+// Import express, logger, and helmet
+const express = require('express');
+const logger = require('morgan');
+const helmet = require("helmet");
+const favicon = require("serve-favicon");
+const path = require("path");
+
+// Import Routes
+const SearchTeamRoute = require("./routes/search");
+const getGeoCoding = require('./routes/getGeoLocation')
+const getHotels = require('./routes/getHotels');
+const getRestaurants = require('./routes/getRestaurants');
+
+// Load environment variables
+require('dotenv').config();
+
+// Instantiate express and use middleware
+const app = express();
+app.use(helmet());
+app.use(logger('tiny'));
+app.use(favicon(path.join(__dirname, 'favicon.ico')))
+
+// Initialize host and port
+const hostname = process.env.HOST;
+const port = 8000;
+
+// Default route 
+app.get('/', function (req, res) {
+    res.status(200).send('<h1>Welcome to Football Trip Planner API</h1> \
+    <h3>Available Endpoints</h3> \
+    <ul> \
+        <li>/search</li> \
+        <li>/getGeoLocation</li> \
+        <li>/getHotels</li> \
+        <li>/getRestaurants</li> \
+    </ul> \
+    ');
+});
+
+// Load other endpoints
+app.use('/search?', SearchTeamRoute);
+app.use('/getGeoLocation?', getGeoCoding);
+app.use('/getHotels?', getHotels);
+app.use('/getRestaurants?', getRestaurants);
+
+// Redirect unmatched url to home
+app.get('*', (req, res) => {
+    res.redirect('/');
+})
+
+// Listen on port 8000
+app.listen(port, function() {
+    console.log(`Express App listening at http://${hostname}:${port}`);
+});
+
+
+
