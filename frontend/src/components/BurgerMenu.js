@@ -138,26 +138,26 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.div`
     position: absolute;
-    width: 10em;
-    height 20vh;
+    width: 8vw;
+    height 14vh;
     background: rgba(214, 224, 240, .8);
     border-radius: 25px;
 
     grid-row: 2 / 3;
-    margin-left: -3.25em;
-    margin-top: 1em;
+    margin-left: -2.5vw;
+    margin-top: 1vh;
 `
 
 const Button = styled.button`
     position: relative;
-    width: 10em;
-    height: 5em;
+    width: 7vw;
+    height: 5vh;
     background: white;
     border-radius: 25px;
-    margin-top: 1.5em;
-    margin-left: .7em;
+    margin-top: 1.5vh;
+    margin-left: .6vw;
     outline: none;
-    font-size: 14px;
+    font-size: calc(10px+.3vh);
     font-weight: bold;
     border: white;
     -webkit-box-shadow: -6px -2px 34px -8px rgba(0,0,0,0.23);
