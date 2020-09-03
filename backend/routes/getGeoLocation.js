@@ -22,7 +22,6 @@ router.get('/:query', (req, res) => {
         return r.data;
     })
     .then(response => {
-        console.log(response)
         // If data is not found, return error
         if (response.status !== 'OK'){
             return res.status(400).send({error: "No results found"});
