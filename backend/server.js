@@ -28,8 +28,8 @@ app.use(favicon(path.join(__dirname, 'favicon.ico')))
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'DELETE, GET, POST, PUT, OPTIONS');
-    res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.header('Access-Control-Allow-Credentials', true); This will always fail in aws ec2
     next();
 })
 
