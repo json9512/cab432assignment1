@@ -14,15 +14,22 @@ const getRestaurants = require('./routes/getRestaurants');
 // Load environment variables
 require('dotenv').config();
 
+// Initialize host and port
+const hostname = process.env.HOST;
+const port = 8000;
+
 // Instantiate express and use middleware
 const app = express();
 app.use(helmet());
 app.use(logger('tiny'));
 app.use(favicon(path.join(__dirname, 'favicon.ico')))
 
-// Initialize host and port
-const hostname = process.env.HOST;
-const port = 8000;
+// Allow cors
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
 
 // Default route 
 app.get('/', function (req, res) {
