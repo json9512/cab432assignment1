@@ -4,6 +4,7 @@ const logger = require('morgan');
 const helmet = require("helmet");
 const favicon = require("serve-favicon");
 const path = require("path");
+const cors = require('cors');
 
 // Import Routes
 const searchTeamRoute = require("./routes/search");
@@ -23,15 +24,7 @@ const app = express();
 app.use(helmet());
 app.use(logger('tiny'));
 app.use(favicon(path.join(__dirname, 'favicon.ico')))
-
-// Allow cors
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'DELETE, GET, POST, PUT, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    //res.header('Access-Control-Allow-Credentials', true); This will always fail in aws ec2
-    next();
-})
+app.use(cors());
 
 // Default route 
 app.get('/', function (req, res) {
