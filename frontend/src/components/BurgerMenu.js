@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Burger from '@animated-burgers/burger-squeeze';
 import '@animated-burgers/burger-squeeze/dist/styles.css';
 import axios from 'axios';
-const public_ip = require('react-public-ip');
+const public_ip = require('public-ip');
 
 const BurgerMenu = (props) => {
     /**

@@ -3,7 +3,7 @@ import GoogleMapComponent from './../components/GoogleMap';
 import BurgerMenu from './../components/BurgerMenu';
 import axios from 'axios';
 import MessageBox from './../components/MessageBox';
-const public_ip = require('react-public-ip');
+const public_ip = require('public-ip');
 
 
 const ResultPage = (props) => {
