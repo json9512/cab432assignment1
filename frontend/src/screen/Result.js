@@ -3,6 +3,7 @@ import GoogleMapComponent from './../components/GoogleMap';
 import BurgerMenu from './../components/BurgerMenu';
 import axios from 'axios';
 import MessageBox from './../components/MessageBox';
+const public_ip = require('react-public-ip');
 
 const ResultPage = (props) => {
     /**
@@ -21,6 +22,19 @@ const ResultPage = (props) => {
     const [hotels, setHotels] = useState([]);
     const [restaurants, setRestaurants] = useState([]);
     const [messageBox, setMessageBox] = useState({});
+    const [publicip, setPublicIp] = useState("");
+
+
+    const getIp = async () => {
+        /**
+         * Gets the public ipv4 address of the current instance
+         * 
+         * (For EC2 deployment and to avoid CORS error within AWS)
+         */
+        const ipv4 = await public_ip.v4() || "localhost";
+        setPublicIp(ipv4);
+    }
+
 
     // import utf8 for string encoding and decoding
     const utf8 = require('utf8');
@@ -36,7 +50,7 @@ const ResultPage = (props) => {
             return;
         }
 
-        await axios.get(`http://localhost:8000/search/${searchQuery}`)
+        await axios.get(`http://${publicip}:8000/search/${searchQuery}`)
         .then( res=>{
             // Data returns an array of possible clubs
             // Retrieve the first result only 
@@ -85,7 +99,7 @@ const ResultPage = (props) => {
         
         if (stadiumAddress && loaded === false){
             // fetch the API endpoint
-            await axios.get(`http://localhost:8000/getGeoLocation/${stadiumAddress}`)
+            await axios.get(`http://${publicip}:8000/getGeoLocation/${stadiumAddress}`)
             .then(res => {
                 if (res.data){
                     // if data is retrieved, set the position 
@@ -102,6 +116,7 @@ const ResultPage = (props) => {
     }
 
     useEffect(()=>{
+        getIp();
         // Get the club information once when the page renders or the searchQuery changes
         getClubInformation();
         
@@ -129,7 +144,8 @@ const ResultPage = (props) => {
                     setHotels={setHotels} 
                     setRestaurants={setRestaurants}
                     setMessageBox={setMessageBox}
-                    location={stadiumPos} />
+                    location={stadiumPos}
+                    ip={publicip} />
                 <GoogleMapComponent 
                     clubName={clubName}
                     clubLogo={clubLogo}

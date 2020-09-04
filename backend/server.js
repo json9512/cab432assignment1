@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const favicon = require("serve-favicon");
 const path = require("path");
 const cors = require('cors');
+const publicIp = require('public-ip');
 
 // Import Routes
 const searchTeamRoute = require("./routes/search");
@@ -16,7 +17,7 @@ const getRestaurants = require('./routes/getRestaurants');
 require('dotenv').config();
 
 // Initialize host and port
-const hostname = process.env.HOST;
+var hostname = publicIp.v4();
 const port = 8000;
 
 // Instantiate express and use middleware
@@ -51,8 +52,8 @@ app.get('*', (req, res) => {
 })
 
 // Listen on port 8000
-app.listen(port, function() {
-    console.log(`Express App listening at http://${hostname}:${port}`);
+app.listen(port, async function() {
+    console.log(`Express App listening at http://${await hostname}:${port}`);
 });
 
 

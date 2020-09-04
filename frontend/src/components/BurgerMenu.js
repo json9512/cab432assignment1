@@ -100,8 +100,8 @@ const BurgerMenu = (props) => {
         if (open) {
             return (
                 <ContentWrapper>
-                    <Button disabled={hotelClicked} onClick={() => {handleButtonClick("http://localhost:8000/getHotels/", "hotel")}}>Hotels</Button>
-                    <Button disabled={restaurantClicked} onClick={() => {handleButtonClick("http://localhost:8000/getRestaurants/", "restaurant")}}>Restaurants</Button>
+                    <Button disabled={hotelClicked} onClick={() => {handleButtonClick(`http://${props.ip}:8000/getHotels/`, "hotel")}}>Hotels</Button>
+                    <Button disabled={restaurantClicked} onClick={() => {handleButtonClick(`http://${props.ip}:8000/getRestaurants/`, "restaurant")}}>Restaurants</Button>
                 </ContentWrapper>
             )
         }
