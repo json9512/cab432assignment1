@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/:query', (req, res) => {
     
     // Check if query is just letters, otherwise throw error 
-    var letters = /^[A-Za-z]+$/;
+    var letters = /^[a-z][a-z\s]*$/;
     if (!req.params.query.match(letters)){
         return res.status(400).send({
             message: "Search string is not alphabets"
