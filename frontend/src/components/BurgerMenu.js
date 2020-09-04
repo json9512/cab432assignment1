@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Burger from '@animated-burgers/burger-squeeze';
 import '@animated-burgers/burger-squeeze/dist/styles.css';
 import axios from 'axios';
+const public_ip = require('react-public-ip');
 
 const BurgerMenu = (props) => {
     /**
@@ -14,6 +15,7 @@ const BurgerMenu = (props) => {
     const [open, setOpen] = useState(false);
     const [hotelClicked, setHotelClicked] = useState(false);
     const [restaurantClicked, setRestaurantClicked] = useState(false);
+    const ipv4 = public_ip.v4();
 
     const handleButtonClick = async (url, type) => {
         /**
@@ -100,8 +102,8 @@ const BurgerMenu = (props) => {
         if (open) {
             return (
                 <ContentWrapper>
-                    <Button disabled={hotelClicked} onClick={() => {handleButtonClick(`http://${props.ip}:8000/getHotels/`, "hotel")}}>Hotels</Button>
-                    <Button disabled={restaurantClicked} onClick={() => {handleButtonClick(`http://${props.ip}:8000/getRestaurants/`, "restaurant")}}>Restaurants</Button>
+                    <Button disabled={hotelClicked} onClick={async () => {handleButtonClick(`http://${await ipv4}:8000/getHotels/`, "hotel")}}>Hotels</Button>
+                    <Button disabled={restaurantClicked} onClick={async () => {handleButtonClick(`http://${await ipv4}:8000/getRestaurants/`, "restaurant")}}>Restaurants</Button>
                 </ContentWrapper>
             )
         }
