@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Burger from '@animated-burgers/burger-squeeze';
 import '@animated-burgers/burger-squeeze/dist/styles.css';
 import axios from 'axios';
-const public_ip = require('public-ip');
 
 const BurgerMenu = (props) => {
     /**
@@ -15,8 +14,8 @@ const BurgerMenu = (props) => {
     const [open, setOpen] = useState(false);
     const [hotelClicked, setHotelClicked] = useState(false);
     const [restaurantClicked, setRestaurantClicked] = useState(false);
-    const ipv4 = public_ip.v4();
-
+    // Get the current ip address from the url
+    const ip_address = window.location.href.split("://")[1].split(":")[0]
     const handleButtonClick = async (url, type) => {
         /**
          * Updates the props state by fetching the given url for the given type (hotel or restaurant)
@@ -102,8 +101,8 @@ const BurgerMenu = (props) => {
         if (open) {
             return (
                 <ContentWrapper>
-                    <Button disabled={hotelClicked} onClick={async () => {handleButtonClick(`http://${await ipv4}:8000/getHotels/`, "hotel")}}>Hotels</Button>
-                    <Button disabled={restaurantClicked} onClick={async () => {handleButtonClick(`http://${await ipv4}:8000/getRestaurants/`, "restaurant")}}>Restaurants</Button>
+                    <Button disabled={hotelClicked} onClick={async () => {handleButtonClick(`http://${ip_address}:8000/getHotels/`, "hotel")}}>Hotels</Button>
+                    <Button disabled={restaurantClicked} onClick={async () => {handleButtonClick(`http://${ip_address}:8000/getRestaurants/`, "restaurant")}}>Restaurants</Button>
                 </ContentWrapper>
             )
         }

@@ -3,8 +3,6 @@ import GoogleMapComponent from './../components/GoogleMap';
 import BurgerMenu from './../components/BurgerMenu';
 import axios from 'axios';
 import MessageBox from './../components/MessageBox';
-const public_ip = require('public-ip');
-
 
 const ResultPage = (props) => {
     /**
@@ -23,8 +21,8 @@ const ResultPage = (props) => {
     const [hotels, setHotels] = useState([]);
     const [restaurants, setRestaurants] = useState([]);
     const [messageBox, setMessageBox] = useState({});
-    const ipv4 = public_ip.v4();
-
+    // Get the current ip address from the url
+    const ip_address = window.location.href.split("http://")[1].split(":")[0]
     // import utf8 for string encoding and decoding
     const utf8 = require('utf8');
     
@@ -39,7 +37,7 @@ const ResultPage = (props) => {
             return;
         }
 
-        const url = `http://${await ipv4}:8000/search/${searchQuery}`;
+        const url = `http://${ip_address}:8000/search/${searchQuery}`;
 
         await axios.get(url)
         .then( res=>{
@@ -90,7 +88,7 @@ const ResultPage = (props) => {
         
         if (stadiumAddress && loaded === false){
             // fetch the API endpoint
-            await axios.get(`http://${await ipv4}:8000/getGeoLocation/${stadiumAddress}`)
+            await axios.get(`http://${ip_address}:8000/getGeoLocation/${stadiumAddress}`)
             .then(res => {
                 if (res.data){
                     // if data is retrieved, set the position 
