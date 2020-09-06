@@ -37,7 +37,7 @@ function GoogleMapComponent(props){
          *      Google Marker Component
          */
         let stadiumAddress = props.stadiumAddress;
-        const stadiumPos = props.stadiumPos;
+        const stadiumPos = {lat: props.stadiumPos.lat, lng: props.stadiumPos.lng};
         if (stadiumAddress === ""){
             stadiumAddress = "N/A"
         } else {
@@ -157,7 +157,7 @@ function GoogleMapComponent(props){
         
         
     }, [props.restaurants])
-    
+
     return (
         <LoadScript 
             googleMapsApiKey={GMAP_KEY}
