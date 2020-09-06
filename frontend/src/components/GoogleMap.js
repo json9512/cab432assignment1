@@ -24,7 +24,6 @@ function GoogleMapComponent(props){
     const [map, setMap] = useState(null);
     const [clubInfowindowVisible, setClubInfoWindowVisible] = useState(false);
     const [markers, setMarkers] = useState([]);
-    const center = props.stadiumPos;
 
     // Decoder component to decode predefined html-entities
     const Entity = require('html-entities').XmlEntities;
@@ -92,6 +91,7 @@ function GoogleMapComponent(props){
         /**
          * Loads the Google map component to the window
          */
+        
         const bounds = new window.google.maps.LatLngBounds();
         map.fitBounds(bounds);
         setMap(map);
@@ -157,8 +157,7 @@ function GoogleMapComponent(props){
         
         
     }, [props.restaurants])
-
-
+    
     return (
         <LoadScript 
             googleMapsApiKey={GMAP_KEY}
@@ -168,7 +167,7 @@ function GoogleMapComponent(props){
             */}
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={center}
+                center={{lat: props.stadiumPos.lat, lng: props.stadiumPos.lng}}
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >   

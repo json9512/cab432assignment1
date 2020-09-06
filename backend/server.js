@@ -9,7 +9,6 @@ const publicIp = require('public-ip');
 
 // Import Routes
 const searchTeamRoute = require("./routes/search");
-const getGeoCoding = require('./routes/getGeoLocation')
 const getHotels = require('./routes/getHotels');
 const getRestaurants = require('./routes/getRestaurants');
 
@@ -33,7 +32,6 @@ app.get('/', function (req, res) {
     <h3>Available Endpoints</h3> \
     <ul> \
         <li>/search</li> \
-        <li>/getGeoLocation</li> \
         <li>/getHotels</li> \
         <li>/getRestaurants</li> \
     </ul> \
@@ -42,7 +40,6 @@ app.get('/', function (req, res) {
 
 // Load other endpoints
 app.use('/search?', searchTeamRoute);
-app.use('/getGeoLocation?', getGeoCoding);
 app.use('/getHotels?', getHotels);
 app.use('/getRestaurants?', getRestaurants);
 
