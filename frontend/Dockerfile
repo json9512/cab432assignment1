@@ -16,6 +16,6 @@ RUN npm install react-scripts@latest -g --silent
 # add app
 COPY . ./
 
-EXPOSE 3000
+EXPOSE 3005
 
 CMD ["npm", "start"]

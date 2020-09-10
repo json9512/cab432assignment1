@@ -4,7 +4,7 @@ services:
     backend:
         build: ./backend
         ports:
-            - "8000:8000"
+            - "8000:8001"
         container_name: backend
         command: "npm start"
     
@@ -12,6 +12,6 @@ services:
         stdin_open: true
         build: ./frontend
         ports: 
-            - "3000:3000"
+            - "3000:3005"
         container_name: frontend
         command: "npm start"

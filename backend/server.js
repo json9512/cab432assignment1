@@ -17,7 +17,7 @@ require('dotenv').config();
 
 // Initialize host and port
 var hostname = publicIp.v4();
-const port = 8000;
+const port = 8001;
 
 // Instantiate express and use middleware
 const app = express();
@@ -48,7 +48,7 @@ app.get('*', (req, res) => {
     res.redirect('/');
 })
 
-// Listen on port 8000
+// Listen on port 8001
 app.listen(port, async function() {
     console.log(`Express App listening at http://${await hostname}:${port}`);
 });
