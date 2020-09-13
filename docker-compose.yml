@@ -2,7 +2,7 @@ version: "3"
 
 services:
     backend:
-        build: ./backend
+        build: ./footballTripPlanner/backend
         ports:
             - "8000:8001"
         container_name: backend
@@ -10,7 +10,7 @@ services:
     
     frontend:
         stdin_open: true
-        build: ./frontend
+        build: ./footballTripPlanner/frontend
         ports: 
             - "3000:3005"
         container_name: frontend
